@@ -90,7 +90,7 @@ class CustomDataset(utils.Dataset):
         subset: Subset to load: train or val
         """
         # Add classes. We have only one class to add.
-        self.add_class("damage", 1, "damage")
+        self.add_class("damage", 1, "damage") #https://keras.io/examples/
 
         # Train or validation dataset?
         assert subset in ["train", "val"]
@@ -176,16 +176,16 @@ class CustomDataset(utils.Dataset):
             super(self.__class__, self).image_reference(image_id)
 
 
-def train(model):
+def train(model, dataset, config):
     """Train the model."""
     # Training dataset.
     dataset_train = CustomDataset()
-    dataset_train.load_custom(args.dataset, "train")
+    dataset_train.load_custom(dataset, "train")
     dataset_train.prepare()
 
     # Validation dataset
     dataset_val = CustomDataset()
-    dataset_val.load_custom(args.dataset, "val")
+    dataset_val.load_custom(dataset, "val")
     dataset_val.prepare()
 
     # *** This training schedule is an example. Update to your needs ***
